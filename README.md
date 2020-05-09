@@ -1,1 +1,2 @@
-# bestshot-selector-aws
+# Best Shot Selector
+
