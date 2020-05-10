@@ -21,10 +21,10 @@ Request type: POST
 Request url: http://awsmachine.com:8001/bestshots  
 Format: application/json  
 Sample request:  
+classs
 ```
 {
-  "location": "<s3_url>"
-  "folder_name": "<folder_name>"
+  "classes": ['people', 'landscape']
 }
 ```
 Sample response:  
