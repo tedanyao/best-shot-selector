@@ -5,7 +5,7 @@ This is a flask WebAPI service.
 # APIs
 ### Download buckets from S3
 Request type: POST  
-Request url: http://localhost:8001/download  
+Request url: http://awsmachine.com:8001/download  
 Sample reqeust body:  
 ```
 {
@@ -18,7 +18,7 @@ Sample reqeust body:
 
 ### Get the best shots in a bucket
 Request type: POST  
-Request url: http://localhost:8001/bestshots  
+Request url: http://awsmachine.com:8001/bestshots  
 Format: application/json  
 Sample request:  
 ```
