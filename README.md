@@ -33,7 +33,12 @@ Sample response:
   "bestshot": ["aaa.jpg", "bbb.jpg"]
 }
 ```
-
+Description:
+It performs 4 steps.  
+1. Download files from S3.  
+2. Do clustering.  
+3. Evaluate scores of each image.  
+4. Select the best shots and return their ids as a JSON.  
 
 ### Testing using curl
 ```
