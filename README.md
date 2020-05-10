@@ -22,7 +22,6 @@ Request url: http://awsmachine.com:8001/bestshots
 Format: application/json  
 Sample request:  
 
-```
 Sample response:  
 ```
 {
