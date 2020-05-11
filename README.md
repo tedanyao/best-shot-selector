@@ -28,13 +28,12 @@ Request type: POST
 Request url: http://awsmachine.com:8001/bestshots  
 Format: application/json  
 Sample request:  
-
-Sample response:  
 ```
 {
     "file_names": ["url1", "url2", "url3"]
 }
 ```
+Sample response:  
 ```
 {
   "bestshot": ["aaa.jpg", "bbb.jpg"]
