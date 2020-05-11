@@ -5,11 +5,11 @@ This is a flask WebAPI service.
 # APIs
 ### 1. Get the classes of the images
 Request type: POST  
-Request url: http://awsmachine.com:8001/classification  
+Request url: http://awsmachine.com:8001/classifications  
 Sample reqeust body:  
 ```
 {
-    "file_names": ['a.jpg', 'b.jpg']
+    "file_names": ['url1', 'url2']
 }
 ```
 Response:
@@ -36,7 +36,7 @@ Sample request:
 Sample response:  
 ```
 {
-  "bestshot": ["aaa.jpg", "bbb.jpg"]
+  "bestshot": ["url1", "url2"]
 }
 ```
 Description:
