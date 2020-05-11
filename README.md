@@ -3,7 +3,7 @@ This is a flask WebAPI service.
 
 
 # APIs
-### Get the classes of the images
+### 1. Get the classes of the images
 Request type: POST  
 Request url: http://awsmachine.com:8001/classification  
 Sample reqeust body:  
@@ -23,7 +23,7 @@ Response:
 }
 ```
 
-### Get the best shots in a bucket
+### 2. Get the best shots in a bucket
 Request type: POST  
 Request url: http://awsmachine.com:8001/bestshots  
 Format: application/json  
@@ -47,9 +47,9 @@ It performs 4 steps.
 3. Evaluate scores of each image.  
 4. Select the best shots and return their ids as a JSON.  
 
-### Testing using curl
+# Testing using curl
 ```
-curl localhost:8001/download -H 'Content-Type: application/json' -d '<JSON>'
+curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '<JSON>'
 ```
 
 # Old Stuff
