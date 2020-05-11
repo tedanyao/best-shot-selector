@@ -9,7 +9,7 @@ Request url: http://awsmachine.com:8001/classifications
 Sample reqeust body:  
 ```
 {
-    "file_names": ['url1', 'url2']
+    "file_names": ["url1", "url2"]
 }
 ```
 Response:
