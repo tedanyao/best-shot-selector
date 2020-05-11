@@ -3,16 +3,23 @@ This is a flask WebAPI service.
 
 
 # APIs
-### Download buckets from S3
+### Get the classes of the images
 Request type: POST  
 Request url: http://awsmachine.com:8001/classification  
 Sample reqeust body:  
 ```
 {
-    "file_names": ['a.jpg', 'b.jpg'],
-    //"aws_access_key_id": "ASIAROPSWYQXJ6Z35E7T",
-    //"aws_secret_access_key": "wzHMdvUV54Bx9jyzZgPZ2H1sQFugo9v6HdZL0GIt",
-    //"token": "xxxxx"
+    "file_names": ['a.jpg', 'b.jpg']
+}
+```
+Response:
+```
+{
+    "classes": [
+        "url1": "people",
+        "url2": "landscape",
+        ...
+    ]
 }
 ```
 
@@ -25,11 +32,7 @@ Sample request:
 Sample response:  
 ```
 {
-    "bucket_name": "yylbucket",
-    "folder_name": "xxxx",
-    //"aws_access_key_id": "ASIAROPSWYQXJ6Z35E7T",
-    //"aws_secret_access_key": "wzHMdvUV54Bx9jyzZgPZ2H1sQFugo9v6HdZL0GIt",
-    //"token": "xxxxx"
+    "file_names": ["url1", "url2", "url3"]
 }
 ```
 ```
@@ -47,4 +50,18 @@ It performs 4 steps.
 ### Testing using curl
 ```
 curl localhost:8001/download -H 'Content-Type: application/json' -d '<JSON>'
+```
+
+# Old Stuff
+### Download buckets from S3 (Not Used)
+Request type: POST  
+Request url: http://awsmachine.com:8001/classification  
+Sample reqeust body:  
+```
+{
+    "file_names": ['a.jpg', 'b.jpg'],
+    "aws_access_key_id": "ASIAROPSWYQXJ6Z35E7T",
+    "aws_secret_access_key": "wzHMdvUV54Bx9jyzZgPZ2H1sQFugo9v6HdZL0GIt",
+    "token": "xxxxx"
+}
 ```
