@@ -49,6 +49,9 @@ It performs 4 steps.
 # Testing using curl
 ```
 curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '<JSON>'
+
+curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg", "https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png"]}'
+
 ```
 
 # Old Stuff
