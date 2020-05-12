@@ -19,8 +19,8 @@ best_shots = [a3, b1, c1, d2] (a3 is the best among a*, d2 is the best among d*)
 
 # APIs
 ### 1. Get the classes of the images
-Request type: POST  
-Request url: http://hostmachine:8001/classifications  
+Request type: ```POST```  
+Request url: ```http://hostmachine:8001/classifications```  
 Sample reqeust body:  
 ```
 # Note that the header should contain a JWT token
