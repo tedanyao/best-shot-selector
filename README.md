@@ -7,9 +7,8 @@ This is a flask WebAPI service.
 Request type: POST  
 Request url: http://awsmachine.com:8001/classifications  
 Sample reqeust body:  
-
 ```
-refresh_token
+# Note that the header should contain a JWT token
 {
     "event_id": "123",
     "file_names": ["url1", "url2"]
@@ -33,6 +32,7 @@ Request url: http://awsmachine.com:8001/bestshots
 Format: application/json  
 Sample request:  
 ```
+# Note that the header should contain a JWT token
 {
     "event_id": "123",
     "file_names": ["url1", "url2", "url3"]
