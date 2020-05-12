@@ -55,10 +55,10 @@ It performs 4 steps.
 # Testing using curl
 ```console
 # test bestshots
-curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '{"event_id":"123", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
+curl localhost:8001/bestshots -H 'Content-Type: application/json' -H "Authorization: Bearer XAASERHRSTJ" -d '{"event_id":"123", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
 
 # test classification
-curl localhost:8001/classifications -H 'Content-Type: application/json' -d '{"event_id":"456", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
+curl localhost:8001/classifications -H 'Content-Type: application/json' -H "Authorization: Bearer AEGERHSZXXT" -d '{"event_id":"456", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
 
 # test downlaod
 curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
