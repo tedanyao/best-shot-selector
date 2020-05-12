@@ -8,3 +8,4 @@ pip3 install -r requirements.txt --no-cache-dir
 #cp credentials ~/.aws/credentials
 #python3 boto.py
 export PYTHONPATH=/home/$USER/image-quality-assessment/src
+python3 main.py

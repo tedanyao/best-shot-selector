@@ -39,9 +39,8 @@ def get_bestshots():
     for filename in json_obj['file_names']:
         toURL[filename.split('/')[-1]] = filename
 
-    os.system('python3 imagecluster/main.py {}'.format(img_folder_name))
-    os.system('export PYTHONPATH=/home/$USER/image-quality-assessment/src')
-    os.system('python3 -m evaluater.predict --base-model-name=MobileNet' 
+    os.system('python3 imagecluster2/main.py {}'.format(img_folder_name))
+    os.system('export PYTHONPATH=/home/$USER/image-quality-assessment/src; python3 -m evaluater.predict --base-model-name=MobileNet'
             + ' --weights-file=/home/$USER/image-quality-assessment/models/MobileNet/weights_mobilenet_technical_0.11.hdf5'
             + ' --image-source /home/$USER/clusters')
 
