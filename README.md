@@ -19,11 +19,11 @@ Response:
 ```
 {
     "event_id": "xxx",
-    "classes": [
+    "classes": {
         "url1": "people",
         "url2": "landscape",
         ...
-    ]
+    }
 }
 ```
 
