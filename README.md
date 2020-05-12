@@ -9,12 +9,14 @@ Request url: http://awsmachine.com:8001/classifications
 Sample reqeust body:  
 ```
 {
+    "event_id": "xxx",
     "file_names": ["url1", "url2"]
 }
 ```
 Response:
 ```
 {
+    "event_id": "xxx",
     "classes": [
         "url1": "people",
         "url2": "landscape",
@@ -30,13 +32,15 @@ Format: application/json
 Sample request:  
 ```
 {
+    "event_id": "xxx",
     "file_names": ["url1", "url2", "url3"]
 }
 ```
 Sample response:  
 ```
 {
-  "bestshots": ["url1", "url2"]
+    "event_id": "xxx"
+    "bestshots": ["url1", "url2"]
 }
 ```
 Description:
