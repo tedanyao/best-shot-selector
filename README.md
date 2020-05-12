@@ -3,7 +3,7 @@ This is a flask WebAPI service.
 
 # Installation
 1. download the repository
-2. ```source setup.py```
+2. ```source setup.sh```
 
 # APIs
 ### 1. Get the classes of the images
