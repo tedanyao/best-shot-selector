@@ -1,5 +1,17 @@
 # Best Shot Selector
-This is a flask WebAPI service.
+This is a flask WebAPI service with the following functions:  
+1. Get the class result of the input url images  
+It detects the category of each images.  
+input_images = [a1, b1, c1]  
+classes = ['people', 'landscape', 'people']  
+
+2. Get the best shots of the input url images  
+If there are similar images, it selects the best shot of those similar images.  
+For example,  
+input_images = [a1, a2, a3, b1, c1, d1, d2]  
+best_shots = [a3, b1, c1, d2] (a3 is the best among a*, d2 is the best among d*)  
+
+* All messages are transmitted by HTTP in JSON format  
 
 # Installation
 1. Download the repository
@@ -68,18 +80,4 @@ curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_name
 
 # send request to another server
 curl localhost:8001/test -H 'Content-Type: application/json'
-```
-
-# Old Stuff
-### Download buckets from S3 (Not Used)
-Request type: POST  
-Request url: http://hostmachine:8001/classification  
-Sample reqeust body:  
-```
-{
-    "file_names": ['a.jpg', 'b.jpg'],
-    "aws_access_key_id": "ASIAROPSWYQXJ6Z35E7T",
-    "aws_secret_access_key": "wzHMdvUV54Bx9jyzZgPZ2H1sQFugo9v6HdZL0GIt",
-    "token": "xxxxx"
-}
 ```
