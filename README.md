@@ -2,7 +2,7 @@
 This is a flask WebAPI service.
 
 # Installation
-1. download the repository
+1. Download the repository
 2. ```source setup.sh```
 
 # APIs
