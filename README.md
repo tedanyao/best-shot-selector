@@ -36,7 +36,7 @@ Sample request:
 Sample response:  
 ```
 {
-  "bestshot": ["url1", "url2"]
+  "bestshots": ["url1", "url2"]
 }
 ```
 Description:
