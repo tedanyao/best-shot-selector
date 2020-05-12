@@ -7,7 +7,9 @@ This is a flask WebAPI service.
 Request type: POST  
 Request url: http://awsmachine.com:8001/classifications  
 Sample reqeust body:  
+
 ```
+refresh_token
 {
     "event_id": "xxx",
     "file_names": ["url1", "url2"]
