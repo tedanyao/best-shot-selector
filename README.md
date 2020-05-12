@@ -47,11 +47,18 @@ It performs 4 steps.
 4. Select the best shots and return their ids as a JSON.  
 
 # Testing using curl
-```
-curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '<JSON>'
+```console
+# test bestshots
+curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
 
-curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg", "https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png"]}'
+# test classification
+curl localhost:8001/classifications -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
 
+# test downlaod
+curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
+
+# test sending request to another server
+curl localhost:8001/test -H 'Content-Type: application/json'
 ```
 
 # Old Stuff
