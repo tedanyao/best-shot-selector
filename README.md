@@ -8,7 +8,7 @@ This is a flask WebAPI service.
 # APIs
 ### 1. Get the classes of the images
 Request type: POST  
-Request url: http://awsmachine.com:8001/classifications  
+Request url: http://hostmachine:8001/classifications  
 Sample reqeust body:  
 ```
 # Note that the header should contain a JWT token
@@ -31,7 +31,7 @@ Response:
 
 ### 2. Get the best shots in a bucket
 Request type: POST  
-Request url: http://awsmachine.com:8001/bestshots  
+Request url: http://hostmachine:8001/bestshots  
 Format: application/json  
 Sample request:  
 ```
@@ -73,7 +73,7 @@ curl localhost:8001/test -H 'Content-Type: application/json'
 # Old Stuff
 ### Download buckets from S3 (Not Used)
 Request type: POST  
-Request url: http://awsmachine.com:8001/classification  
+Request url: http://hostmachine:8001/classification  
 Sample reqeust body:  
 ```
 {
