@@ -1,0 +1,19 @@
+Download from S3:
+input
+{
+    "bucket_name": "yylbucket",
+    "aws_access_key_id": "ASIAROPSWYQXJ6Z35E7T",
+    "aws_secret_access_key": "wzHMdvUV54Bx9jyzZgPZ2H1sQFugo9v6HdZL0GIt",
+    "token": "xxxxx"
+} 
+
+Clustering:
+input
+{"classes": ['people', 'landscape']}
+
+return 
+{"bestshots": ['1.jpg', '2.jpg']}
+
+
+
+curl localhost:8001/download -H 'Content-Type: application/json' -d '{"bucket_name": "yylbucket","aws_access_key_id":"ASIAROPSWYQXDBACLMPY","aws_secret_access_key": "E5j0ROObpPvdXxdiZp/QqubbuniVgQcVVCe11ZEc", "token": "FwoGZXIvYXdzEKL//////////wEaDJl1iH3Qz3iPO1N6ziK9ATdL5/SXj5PXxRoeDQPmIMgmGFcYSK4mmjNYHt1KmUGX/an1c/z7+Sr/DUSvHi9CY2vGWXWFk2YZvu/Hape8XVuPZWyrmNbhGpuYlT/o3fHyAwPr+dPyXLVvkzyz3jFumFBXpMQH2Qpgw/E9oUqO+wGrXNNuQjQ7nJ2qifzRZbj8P/OT/TqLC8XbVGirHO2ONTWM2uVwrfdNYRl5Qaf389NU55jW417r2MeI2vpxUDKR53Uop3JhM6MD6AanRSiW3NL1BTItHpZ5YpazOLM1ocMvDI5Je0c1OaFNc/PDYnPFwhhH5eUU9bHNuYqMfxlvwUth"}'
