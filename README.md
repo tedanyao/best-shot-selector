@@ -1,6 +1,9 @@
 # Best Shot Selector
 This is a flask WebAPI service.
 
+# Installation
+1. download the repository
+2. ```source setup.py```
 
 # APIs
 ### 1. Get the classes of the images
