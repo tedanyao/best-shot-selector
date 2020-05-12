@@ -1,13 +1,14 @@
 from flask import jsonify
 from flask import Flask
-# import boto
+from flask import request
 from myutils import urldownload
 from myutils import classification
 from myutils import return_id
-from flask import request
 import os
 import requests
 import json
+
+# import boto
 
 app = Flask(__name__)
 
@@ -90,9 +91,9 @@ def test_post():
 
 
 # ===================================================================================
-#  Old stuff
+#  Old Stuff
 # ===================================================================================
-@app.route('/cluster')
+@app.route('/test_cluster')
 def clustering():
     try:
         os.system('python3 imagecluster/main.py {}'.format(img_folder_name))
@@ -100,15 +101,7 @@ def clustering():
     except:
         return "Error: clustering fail"
 
-@app.route('/bestshots_old', methods=['GET'])
-def bestshots_old():
-    os.system('python3 imagecluster/main.py {}'.format(img_folder_name))
-    os.system('python3 -m evaluater.predict --base-model-name=MobileNet --weights-file=/home/$USER/image-quality-assessment/models/MobileNet/weights_mobilenet_technical_0.11.hdf5 --image-source /home/$USER/clusters')
-    ids = {}
-    ids['bestshots'] = return_id.main()
-    return ids
-
-@app.route('/download_s3', methods=['POST'])
+@app.route('/test_download_s3', methods=['POST'])
 def download_s3():
     if request.method == 'POST':
         f = request.get_json()
@@ -121,10 +114,9 @@ def download_s3():
         secret_key = f['aws_secret_access_key']
         token = f['token']
         # boto.main(bucket_name, access_key, secret_key, token)
-        #os.system("python3 boto.py " + bucket_name + " " + access_key + " " + secret_key)
         return "finished downloading '" + bucket_name + "'"
 
-@app.route('/evaluate')
+@app.route('/test_evaluate')
 def evaluate():
     try:
         os.system('python3 -m evaluater.predict --base-model-name=MobileNet --weights-file=/home/$USER/image-quality-assessment/models/MobileNet/weights_mobilenet_technical_0.11.hdf5 --image-source /home/$USER/clusters')
@@ -132,7 +124,7 @@ def evaluate():
     except:
         return "Error: evaluation fail"
 
-@app.route('/result')
+@app.route('/test_result')
 def result():
     try:
         ids = {}
@@ -141,6 +133,8 @@ def result():
     except:
         return "Error: find ids fail"
 
+    
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True,port='8001')
+    app.run(host='0.0.0.0', debug=True, port='8001')
 
