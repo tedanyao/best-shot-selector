@@ -11,14 +11,14 @@ Sample reqeust body:
 ```
 refresh_token
 {
-    "event_id": "xxx",
+    "event_id": "123",
     "file_names": ["url1", "url2"]
 }
 ```
 Response:
 ```
 {
-    "event_id": "xxx",
+    "event_id": "123",
     "classes": {
         "url1": "people",
         "url2": "landscape",
@@ -34,14 +34,14 @@ Format: application/json
 Sample request:  
 ```
 {
-    "event_id": "xxx",
+    "event_id": "123",
     "file_names": ["url1", "url2", "url3"]
 }
 ```
 Sample response:  
 ```
 {
-    "event_id": "xxx"
+    "event_id": "123"
     "bestshots": ["url1", "url2"]
 }
 ```
@@ -55,10 +55,10 @@ It performs 4 steps.
 # Testing using curl
 ```console
 # test bestshots
-curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
+curl localhost:8001/bestshots -H 'Content-Type: application/json' -d '{"event_id":"123", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
 
 # test classification
-curl localhost:8001/classifications -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
+curl localhost:8001/classifications -H 'Content-Type: application/json' -d '{"event_id":"456", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
 
 # test downlaod
 curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}'
