@@ -7,7 +7,7 @@ from myutils import return_id
 import os
 import requests
 import json
-
+import urllib.parse
 # import boto
 
 app = Flask(__name__)
@@ -37,9 +37,11 @@ def get_bestshots():
     json_obj = request.get_json()
     if not json_obj or not 'file_names' in json_obj:
         return jsonify(False)
+    print ('json object: ', json_obj)
     event_id = json_obj['event_id']
     for filename in json_obj['file_names']:
-        toURL[filename.split('/')[-1]] = filename
+        url_obj = urllib.parse.urlparse(filename)
+        toURL[url_obj.path.split('/')[-1]] = filename
 
     os.system('python3 imagecluster2/main.py {}'.format(img_folder_name))
     os.system('export PYTHONPATH=/home/$USER/image-quality-assessment/src; python3 -m evaluater.predict --base-model-name=MobileNet'
@@ -65,6 +67,7 @@ def do_classify():
     f = request.get_json()
     if not f or 'file_names' not in f:
         return jsonify("invalid json file")
+    print ('json object: ', f)
     filenames = f['file_names']
     class_dict = classification.classify(filenames)
     res = {}
@@ -140,4 +143,3 @@ def result():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, port=port)
-
