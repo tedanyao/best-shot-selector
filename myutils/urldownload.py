@@ -1,4 +1,5 @@
 import urllib.request
+import urllib.parse
 import json
 import os
 import shutil
@@ -11,12 +12,15 @@ def download(json_obj, folder_name):
     os.mkdir(folder_name)
     for filename in json_obj['file_names']:
         try:
-            f, h = urllib.request.urlretrieve(filename, folder_name + '/' + filename.split('/')[-1])
+            url_obj = urllib.parse.urlparse(filename)
+            print ('[MSG] Downloading file: ', url_obj.path.split('/')[-1])
+            f, h = urllib.request.urlretrieve(filename, folder_name + '/' + url_obj.path.split('/')[-1])
         except:
             print ('[WANRING] URL Error when downloading: ', filename)
     return True
 
 
 if __name__ == '__main__':
-    json_obj = json.loads('{ "file_names": ["https://i.ibb.co/ZGxxX8W/20.jpg","https://i.ibb.co/Vm8zSHj/19.jpg","https://i.ibb.co/wS1fJd1/18.jpg","https://i.ibb.co/dQH8pJ3/17.jpg","https://i.ibb.co/Xy8JCW2/16.jpg","https://i.ibb.co/7JfMddj/15.jpg","https://i.ibb.co/g4LFLxp/14.jpg","https://i.ibb.co/Kxh0Mhg/13.jpg","https://i.ibb.co/2ktWrkw/12.jpg","https://i.ibb.co/vmVk41M/11.jpg","https://i.ibb.co/CvDscZj/10.jpg","https://i.ibb.co/R07CpTL/9.jpg","https://i.ibb.co/5LwHNS5/8.jpg","https://i.ibb.co/mqmGS0K/7.jpg","https://i.ibb.co/vwd0VLt/6.jpg","https://i.ibb.co/t25T3vg/5.jpg","https://i.ibb.co/TWt0Y4n/4.jpg","https://i.ibb.co/NymXFJT/3.jpg","https://i.ibb.co/mckt67T/2.jpg","https://i.ibb.co/X7Y0mFp/1.jp"], "event_id": "123" }')
+    json_obj = json.loads('{"event_id":"456", "file_names": ["https://cdn.eso.org/images/screen/eso1907a.jpg"]}')
+    json_obj = json.loads('{"event_id": "18", "file_names": ["https://firebasestorage.googleapis.com/v0/b/justshare-10b29.appspot.com/o/photos%2F122447dc-b9a1-4faa-aa39-4df40306974d.jpg?alt=media&token=01941832-5dcb-48a4-b63f-5ca2146445e0"]}')
     download(json_obj, 'images')
