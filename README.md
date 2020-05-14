@@ -80,4 +80,8 @@ curl localhost:8001/download -H 'Content-Type: application/json' -d '{"file_name
 
 # send request to another server
 curl localhost:8001/test -H 'Content-Type: application/json'
+
+# another test
+curl http://ec2-54-221-41-82.compute-1.amazonaws.com:8001/classifications -H 'Content-Type: application/json' -H "Authorization: Bearer AEGERHSZXXT" -d '{ "file_names": ["https://i.ibb.co/ZGxxX8W/20.jpg","https://i.ibb.co/Vm8zSHj/19.jpg","https://i.ibb.co/wS1fJd1/18.jpg","https://i.ibb.co/dQH8pJ3/17.jpg","https://i.ibb.co/Xy8JCW2/16.jpg","https://i.ibb.co/7JfMddj/15.jpg","https://i.ibb.co/g4LFLxp/14.jpg","https://i.ibb.co/Kxh0Mhg/13.jpg","https://i.ibb.co/2ktWrkw/12.jpg","https://i.ibb.co/vmVk41M/11.jpg","https://i.ibb.co/CvDscZj/10.jpg","https://i.ibb.co/R07CpTL/9.jpg","https://i.ibb.co/5LwHNS5/8.jpg","https://i.ibb.co/mqmGS0K/7.jpg","https://i.ibb.co/vwd0VLt/6.jpg","https://i.ibb.co/t25T3vg/5.jpg","https://i.ibb.co/TWt0Y4n/4.jpg","https://i.ibb.co/NymXFJT/3.jpg","https://i.ibb.co/mckt67T/2.jpg","https://i.ibb.co/X7Y0mFp/1.jpg"], "event_id": "123" }'
+
 ```
