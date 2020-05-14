@@ -8,6 +8,7 @@ import os
 import requests
 import json
 import urllib.parse
+import glob
 # import boto
 
 app = Flask(__name__)
@@ -19,10 +20,10 @@ cluster_path = os.path.join(cur_path, 'clusters')
 folder_path = os.path.join(cur_path, dirname)
 
 host_test = 'http://localhost:8002/tests/endpoint'
-host_classifications = 'http://localhost:8002/tests/endpoint'
-host_bestshots = 'http://localhost:8002/tests/endpoint'
-#host_classifications = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/class'
-#host_bestshots = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/is_bestshot'
+#host_classifications = 'http://localhost:8002/tests/endpoint'
+#host_bestshots = 'http://localhost:8002/tests/endpoint'
+host_classifications = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/class'
+host_bestshots = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/is_bestshot'
 
 @app.route('/')
 def root_path():
@@ -46,9 +47,16 @@ def get_bestshots():
         url_obj = urllib.parse.urlparse(filename)
         toURL[url_obj.path.split('/')[-1]] = filename
 
+    img_paths = glob.glob(folder_path + '/*.jpg')
+    print ('img_paths: ', img_paths)
+    if len(img_paths) == 0:
+        print ("Error: no images downloaded")
+        return jsonify("No images downloaded")
+    #return "abc"
+    
     os.system('python3 imagecluster2/main.py {}'.format(folder_path))
-    print ('export PYTHONPATH={}/image-quality-assessment/src;'.format(cur_path))
 
+    print ('export PYTHONPATH={}/image-quality-assessment/src;'.format(cur_path))
     os.system('export PYTHONPATH={}/image-quality-assessment/src;'.format(cur_path)
             + ' python3 -m evaluater.predict --base-model-name=MobileNet'
             + ' --weights-file={}/image-quality-assessment/models/MobileNet/weights_mobilenet_technical_0.11.hdf5'.format(cur_path)
@@ -64,29 +72,57 @@ def get_bestshots():
     if not token:
         return jsonify("Request does not contain a JWT token!")
     print (token)
+    print ('results:', ids)
     send_status = requests.post(host_bestshots, json=ids, headers={'Authorization': 'Bearer ' + token[7:]})
     return ids
 
 
 @app.route('/classifications', methods=['POST'])
 def do_classify():
-    f = request.get_json()
-    if not f or 'file_names' not in f:
-        return jsonify("invalid json file")
-    print ('json object: ', f)
-    filenames = f['file_names']
-    class_dict = classification.classify(filenames)
-    res = {}
-    res['event_id'] = f['event_id']
-    res['classes'] = class_dict
+    res = download_from_url()
+    if not res:
+        return jsonify("bestshots error!")
 
+    # create a mapping: url => filename
+    toURL = {}
+    json_obj = request.get_json()
+    if not json_obj or not 'file_names' in json_obj:
+        return jsonify(False)
+    print ('json object: ', json_obj)
+    event_id = json_obj['event_id']
+    for filename in json_obj['file_names']:
+        url_obj = urllib.parse.urlparse(filename)
+        toURL[url_obj.path.split('/')[-1]] = filename
+
+    os.system('python3 PyTorch-YOLOv3/main.py {}'.format(folder_path))
+    classes = {}
+    classes['event_id'] = event_id
+    full_path = cur_path + '/result.json'
+    data = {}
+    with open(full_path) as f:
+        data = json.load(f)
+    print ('get JSON: ', data)
+    class_dict = {}
+    for key in data.keys():
+        class_dict[toURL[key]] = data[key]
+    classes['classes'] = class_dict
+#    f = request.get_json()
+#    if not f or 'file_names' not in f:
+#        return jsonify("invalid json file")
+#    print ('json object: ', f)
+#    filenames = f['file_names']
+#    class_dict = classification.classify(filenames)
+#    res = {}
+#    res['event_id'] = f['event_id']
+#    res['classes'] = class_dict
+#
     # make a request
     token = request.headers.get('Authorization')
     if not token:
         return jsonify("Request does not contain a JWT token!")
     print (token)
-    send_status = requests.post(host_classifications, json=res, headers={'Authorization': 'Bearer ' + token[7:]})
-    return res
+    send_status = requests.post(host_classifications, json=classes, headers={'Authorization': 'Bearer ' + token[7:]})
+    return classes
 
 @app.route('/download', methods=['POST'])
 def download_from_url():

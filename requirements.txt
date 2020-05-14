@@ -10,3 +10,6 @@ boto3
 flask
 opencv-python
 requests
+torch
+torchvision
+tqdm

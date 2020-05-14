@@ -54,6 +54,13 @@ def main(base_model_name, weights_file, image_source, predictions_file, img_form
         print ('image_dir:', image_dir)
         samples = image_dir_to_json(image_dir, img_type='jpg') # YY
         print ('samples:', samples) # YY
+        if len(samples) == 1:
+            samples[0]['mean_score_prediction'] = 5.0
+            print(json.dumps(samples, indent=2))
+            if predictions_file is not None:
+                save_json(samples, image_dir + '/' + 'evaluate.json') # YY
+            return
+
 
     # build model and load weights
     nima = Nima(base_model_name, weights=None)

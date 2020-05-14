@@ -1,11 +1,9 @@
-import cv2
-from flask import jsonify
 import numpy as np
 import urllib.request
 
 def classify(file_names):
     # Load the cascade
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier('visionary.net_pedestrian_cascade_web_LBP.xml')
     # Read the input image
     #img = cv2.imread('images/aaa.png')
     result = {}
@@ -17,13 +15,15 @@ def classify(file_names):
         # Convert into grayscale
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # Detect faces
-        faces = face_cascade.detectMultiScale(gray, 1.1, 4)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 4)
         # Draw rectangle around the faces
         # print (filename, faces, type(list(faces)))
-        print (filename, 'faces', faces)
-        if list(faces) and len(list(faces)) <= 3:
+        if list(faces):
+            print (filename, 'faces', faces)
             result[filename] = "people"
         else:
             result[filename] = "landscape"
     return result
 
+if __name__ == '__main__':
+    classify(['/home/best-shot-selector/images/photos%2F06887cc8-b9c8-4191-8cb6-f7161854f79d.jpg'])

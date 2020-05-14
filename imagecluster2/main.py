@@ -45,7 +45,7 @@ if len(images) == 1:
     print (list(images.keys()))
     clusters = {1: [list(images.keys())]}
 else:
-    clusters = calc.cluster(fingerprints, sim=0.3, timestamps=None, alpha=0, min_csize=1)
+    clusters = calc.cluster(fingerprints, sim=0.5, timestamps=None, alpha=0, min_csize=1)
 # print (clusters)
 
 # Create dirs with links to images. Dirs represent the clusters the images
