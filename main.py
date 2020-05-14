@@ -12,13 +12,14 @@ import json
 
 app = Flask(__name__)
 
+port = '8001'
 img_folder_name = 'images'
 
-host_test = 'http://localhost:8002/tests/endpoint'
-host_classifications = 'http://localhost:8002/tests/endpoint'
+#host_test = 'http://localhost:8002/tests/endpoint'
+#host_classifications = 'http://localhost:8002/tests/endpoint'
 host_bestshots = 'http://localhost:8002/tests/endpoint'
-#host_classifications = 'http://localhost:5000/pictures/class'
-#host_bestshots = 'http://localhost:5000/pictures/is_bestshot'
+host_classifications = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/class'
+host_bestshots = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/is_bestshot'
 
 @app.route('/')
 def root_path():
@@ -54,7 +55,8 @@ def get_bestshots():
     token = request.headers.get('Authorization')
     if not token:
         return jsonify("Request does not contain a JWT token!")
-    send_status = requests.post(host_bestshots, json=ids, headers={'Authorization': token})
+    print (token)
+    send_status = requests.post(host_bestshots, json=ids, headers={'Authorization': 'Bearer ' + token[7:]})
     return ids
 
 
@@ -73,7 +75,8 @@ def do_classify():
     token = request.headers.get('Authorization')
     if not token:
         return jsonify("Request does not contain a JWT token!")
-    send_status = requests.post(host_classifications, json=res, headers={'Authorization': token})
+    print (token)
+    send_status = requests.post(host_classifications, json=res, headers={'Authorization': 'Bearer ' + token[7:]})
     return res
 
 @app.route('/download', methods=['POST'])
@@ -136,5 +139,5 @@ def result():
     
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True, port='8001')
+    app.run(host='0.0.0.0', debug=True, port=port)
 
