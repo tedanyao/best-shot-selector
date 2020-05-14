@@ -15,9 +15,9 @@ app = Flask(__name__)
 port = '8001'
 img_folder_name = 'images'
 
-#host_test = 'http://localhost:8002/tests/endpoint'
+host_test = 'http://localhost:8002/tests/endpoint'
 #host_classifications = 'http://localhost:8002/tests/endpoint'
-host_bestshots = 'http://localhost:8002/tests/endpoint'
+#host_bestshots = 'http://localhost:8002/tests/endpoint'
 host_classifications = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/class'
 host_bestshots = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/is_bestshot'
 
