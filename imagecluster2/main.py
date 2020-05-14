@@ -8,9 +8,15 @@ from imagecluster import calc, io as icio, postproc
 import os
 import sys
 USER = os.environ.get('USER')
-folder_name = 'images'
+
+folder_path = '/home/' + USER + "/" + 'images'
+dest_path = '/home/' + USER + "/" + 'clusters'
 if len(sys.argv) >= 2:
-    folder_name = sys.argv[1]
+    folder_path = sys.argv[1]
+    dest_path = '/'.join(sys.argv[1].split('/')[:-1] + ['clusters'])
+else:
+    raise('Please enter a folder name')
+
 ##images,fingerprints,timestamps = icio.get_image_data(
 ##    'pics/',
 ##    pca_kwds=dict(n_components=0.95),
@@ -18,7 +24,7 @@ if len(sys.argv) >= 2:
 
 # Create image database in memory. This helps to feed images to the NN model
 # quickly.
-images = icio.read_images('/home/' + USER + "/" + folder_name, size=(224,224))
+images = icio.read_images(folder_path, size=(224,224))
 # Create Keras NN model.
 model = calc.get_model()
 
@@ -31,7 +37,7 @@ fingerprints = calc.pca(fingerprints, n_components=0.95)
 
 # Read image timestamps. Need that to calculate the time distance, can be used
 # in clustering.
-timestamps = icio.read_timestamps('/home/' + USER + "/" + folder_name)
+timestamps = icio.read_timestamps(folder_path)
 
 # Run clustering on the fingerprints. Select clusters with similarity index
 # sim=0.5. Mix 80% content distance with 20% timestamp distance (alpha=0.2).
@@ -44,7 +50,7 @@ else:
 
 # Create dirs with links to images. Dirs represent the clusters the images
 # belong to.
-postproc.make_links(clusters, '/home/' + USER + '/clusters')
+postproc.make_links(clusters, dest_path)
 
 # Plot images arranged in clusters and save plot.
 fig,ax = postproc.plot_clusters(clusters, images)

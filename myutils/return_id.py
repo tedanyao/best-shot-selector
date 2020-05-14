@@ -26,9 +26,9 @@ def getMaxScoreId(jsondata):
 #        else:
 #            raise("Error: Folders that has images is missing " + key_filename)
 
-def main():
+def find_best(folder_path):
     outputs = []
-    for dirpath, dirnames, filenames in os.walk(IMAGE_SOURCE):
+    for dirpath, dirnames, filenames in os.walk(folder_path):
         if filenames:
             full_path = dirpath + '/' + key_filename
             try:

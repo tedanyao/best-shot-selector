@@ -13,13 +13,16 @@ import urllib.parse
 app = Flask(__name__)
 
 port = '8001'
-img_folder_name = 'images'
+dirname = 'images'
+cur_path = os.path.realpath('.')
+cluster_path = os.path.join(cur_path, 'clusters')
+folder_path = os.path.join(cur_path, dirname)
 
 host_test = 'http://localhost:8002/tests/endpoint'
-#host_classifications = 'http://localhost:8002/tests/endpoint'
-#host_bestshots = 'http://localhost:8002/tests/endpoint'
-host_classifications = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/class'
-host_bestshots = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/is_bestshot'
+host_classifications = 'http://localhost:8002/tests/endpoint'
+host_bestshots = 'http://localhost:8002/tests/endpoint'
+#host_classifications = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/class'
+#host_bestshots = 'http://flask-env.eba-m2jsxfrb.us-west-2.elasticbeanstalk.com/pictures/is_bestshot'
 
 @app.route('/')
 def root_path():
@@ -43,14 +46,17 @@ def get_bestshots():
         url_obj = urllib.parse.urlparse(filename)
         toURL[url_obj.path.split('/')[-1]] = filename
 
-    os.system('python3 imagecluster2/main.py {}'.format(img_folder_name))
-    os.system('export PYTHONPATH=/home/$USER/image-quality-assessment/src; python3 -m evaluater.predict --base-model-name=MobileNet'
-            + ' --weights-file=/home/$USER/image-quality-assessment/models/MobileNet/weights_mobilenet_technical_0.11.hdf5'
-            + ' --image-source /home/$USER/clusters')
+    os.system('python3 imagecluster2/main.py {}'.format(folder_path))
+    print ('export PYTHONPATH={}/image-quality-assessment/src;'.format(cur_path))
+
+    os.system('export PYTHONPATH={}/image-quality-assessment/src;'.format(cur_path)
+            + ' python3 -m evaluater.predict --base-model-name=MobileNet'
+            + ' --weights-file={}/image-quality-assessment/models/MobileNet/weights_mobilenet_technical_0.11.hdf5'.format(cur_path)
+            + ' --image-source {}/clusters'.format(cur_path))
 
     ids = {}
     ids['event_id'] = event_id
-    arr = [toURL[item] for item in return_id.main()]
+    arr = [toURL[item] for item in return_id.find_best(cluster_path)]
     ids['bestshots'] = arr
 
     # make a request
@@ -84,7 +90,7 @@ def do_classify():
 
 @app.route('/download', methods=['POST'])
 def download_from_url():
-    return jsonify(urldownload.download(request.get_json(), img_folder_name))
+    return jsonify(urldownload.download(request.get_json(), folder_path))
 
 @app.route('/test')
 def test_post():
@@ -102,7 +108,7 @@ def test_post():
 @app.route('/test_cluster')
 def clustering():
     try:
-        os.system('python3 imagecluster/main.py {}'.format(img_folder_name))
+        os.system('python3 imagecluster/main.py {}'.format(folder_path))
         return "finish clustering"
     except:
         return "Error: clustering fail"
