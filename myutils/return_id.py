@@ -1,7 +1,7 @@
 import os
 import json
-USER = os.environ.get('USER')
-IMAGE_SOURCE = '/home/' + USER + '/clusters'
+#USER = os.environ.get('USER')
+#IMAGE_SOURCE = '/home/' + USER + '/clusters'
 
 key_filename = 'evaluate.json'
 
