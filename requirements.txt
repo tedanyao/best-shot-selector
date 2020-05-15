@@ -8,7 +8,6 @@ piexif
 sklearn
 boto3
 flask
-opencv-python
 requests
 torch
 torchvision
