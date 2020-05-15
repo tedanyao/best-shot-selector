@@ -2,7 +2,7 @@ from flask import jsonify
 from flask import Flask
 from flask import request
 from myutils import urldownload
-from myutils import classification
+# from myutils import classification
 from myutils import return_id
 import os
 import requests
