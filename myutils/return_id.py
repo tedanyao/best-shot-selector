@@ -14,18 +14,6 @@ def getMaxScoreId(jsondata):
             maxId = jsondata[i]['image_id']
     return maxId
 
-#print ('Max score ids under path \'' + IMAGE_SOURCE + '\':')
-#for dirpath, dirnames, filenames in os.walk(IMAGE_SOURCE):
-#    if filenames:
-#        if key_filename in filenames:
-#            full_path = dirpath + '/' + key_filename
-#            with open(full_path) as f:
-#                data = json.load(f)
-#                max_id = getMaxScoreId(data)
-#                print (max_id + '.jpg')
-#        else:
-#            raise("Error: Folders that has images is missing " + key_filename)
-
 def find_best(folder_path):
     outputs = []
     for dirpath, dirnames, filenames in os.walk(folder_path):
