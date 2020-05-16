@@ -7,10 +7,10 @@
 from imagecluster import calc, io as icio, postproc
 import os
 import sys
-USER = os.environ.get('USER')
+# USER = os.environ.get('USER')
 
-folder_path = '/home/' + USER + "/" + 'images'
-dest_path = '/home/' + USER + "/" + 'clusters'
+# folder_path = '/home/' + USER + "/" + 'images'
+# dest_path = '/home/' + USER + "/" + 'clusters'
 if len(sys.argv) >= 2:
     folder_path = sys.argv[1]
     dest_path = '/'.join(sys.argv[1].split('/')[:-1] + ['clusters'])
