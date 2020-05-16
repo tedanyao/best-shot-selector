@@ -18,9 +18,11 @@ best_shots = [a3, b1, c1, d2] (a3 is the best among a*, d2 is the best among d*)
 * Ubuntu
 1. Download the repository
 2. ```source setup.sh```
+3. RUN: ```python3 main.py```
 * CentOS
 1. Download the repository
 2. ```source setup_centOS.sh```
+3. RUN: ```python3 main.py```
 
 ### Using a docker container
 Please see the folder "Docker" for further instructions.
