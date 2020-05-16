@@ -14,8 +14,16 @@ best_shots = [a3, b1, c1, d2] (a3 is the best among a*, d2 is the best among d*)
 * All messages are transmitted by HTTP in JSON format  
 
 # Installation
+### Environment
+* Ubuntu
 1. Download the repository
 2. ```source setup.sh```
+* CentOS
+1. Download the repository
+2. ```source setup_centOS.sh```
+
+### Using a docker container
+Please see the folder "Docker" for further instructions.
 
 # APIs
 ### 1. Get the classes of the images
